@@ -12,13 +12,11 @@ public class World {
 	Room jungle = new Room("jungle", "JUNGLE");
 	Room canopy = new Room("canopy", "CANOPY");
 	Room pond = new Room("pond", "POND");
-	Room deepPond = new Room("deepPond", "PONDd");
-	Room pit = new Room("Pit", "PIT");
 	
 	
 	//Adding Items to Rooms
 	caveManHouse.addItem(new Club());
-	canopy.addItem(new Item("elephantleaf", "It is a large, green leaf, resembling an elephant's ear. There is a weird air-filled sack on the stem of the leaf."));
+	canopy.addItem(new elephantLeaf());
 	mudPuddle.addItem(new Item("mud", "It is a glob of smelly mud."));
 	pond.addItem(new Whistle());
 	caveManHouse.addItem(new Dog()); //Will likely become character, but it functions as I intend it to right now.
@@ -30,9 +28,7 @@ public class World {
 	mudPuddle.addTwoWay(jungle, 'w');
 	mudPuddle.addTwoWay(pond, 'n');
 	cave.addTwoWay(caveManHouse, 'e');
-	
-	jungle.addExit(canopy, 'u');
-	canopy.addExit(pit, 'd');
+	jungle.addTwoWay(canopy, 'u');
 	
 	//Adding locks and traps
 	caveManHouse.setLocked(true, "You politely knocked on the door. There was a grunt from the inside.");

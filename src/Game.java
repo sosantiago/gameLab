@@ -82,8 +82,11 @@ public class Game {
 	 * How you, as a character, move around.
 	 */
 	public static void move(char dir) {
-		if (currentRoom.getName().equals("mudPuddle"))
+		if (currentRoom.getName().equals("mudPuddle")) {
 			currentRoom.setId("MUD_PUDDLE1a");
+		} else if (currentRoom.getName().equals("jungle")) {
+			currentRoom.setLocked(true, "If you try to go back down, you will plummet to your death. Perhaps you possess a large, parachute like item that could allow you to go down easier?");
+		}
 		Room nextRoom = currentRoom.getExit(dir);
 		if (nextRoom != null) {
 			if(nextRoom.isLocked()) {

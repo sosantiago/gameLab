@@ -19,6 +19,9 @@ public class Room implements Serializable {
 	private boolean locked; //Is the room locked?
 	private String lockedMessage;
 	
+	//Move Messages
+	private HashMap<String, String> moveMessages;
+	
 	/*
 	 * HashMap for Item Objects.
 	 */
@@ -29,6 +32,7 @@ public class Room implements Serializable {
 		roomName = n;
 		id = d;
 		roomItems = new HashMap<String, Item>();
+		moveMessages = new HashMap<String, String>(); //Messages to be said when specific moves are made.
 		Game.addRoom(n, this); //Room object places self on map
 	}
 
