@@ -9,21 +9,19 @@ public class Whistle extends Item {
 		if(Game.getCurrentRoom().getName().equals("cave")) {
 			if (!isUsed()) {
 				Game.print("From the locked door comes a hulking cave-man."
-					+ " He threateningly gestures you. You'd better run, frankly.");
+					+ " He threateningly gestures you. You want to run, but you also really want to invade his home.");
 				setUsed(true);
-				Game.getCurrentRoom().getExit('e').setLocked(false);
+				Game.getCurrentRoom().setID("CAVE1a");
+				Game.getCurrentRoom().getExit('e').setLocked(true, "Do you really want to try and sneak past the cave man that is very clearly mad at you?");
 			} else {
-				Game.lose();
-				Game.print("The cave-man lunged at you and ripped your face off. Should have been more considerate. GAME OVER.");
+				Game.print("The cave-man lunged at you and ripped your face off. You knew he didn't like it! Should have been more considerate.");
+				Game.die();
 			}
 		} else {
 			if (!isUsed()) {
 			Game.print("You blew into the whistle. It made"
 					+ " a loud, piercing cry. You hear a startled grunt"
-					+ " in the distance.");
-			} else {
-				Game.print("The disgruntled cave-man rushed to you. He repeatedly slammed his giant fist against his open palm. Is this mercy?");
-				//Ideally, once we add characters, I will make the player fight the cave-man in rock-paper scissors. Until then, this is the cliff-hanger.
+					+ " deep in the cave.");
 			}
 		}
 	}

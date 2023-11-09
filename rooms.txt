@@ -1,0 +1,30 @@
+MUD_PUDDLE1
+You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are.
+#
+MUD_PUDDLE1a
+You are once again standing in the mud. For some strange reason, you keep stepping in it. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond.
+#
+CAVE1
+You are in a dark cave. The west is the way you came from. To your east, there is a locked door make of tree-bark.
+#
+CAVE1a
+You are in a dark cave. The west is the way you came from. To your east stands the caveman that YOU angered, blocking the path into his home.
+#
+CAVE_HOUSE
+You are inside of a small well-lit room. It is furnished with crude chairs and a large bed, and a wooden club lie on a weapons rack. On the bed lie a large, hairy creature you can only identify as a dog. You can exit west.
+#
+JUNGLE
+You are in a large clearing, surrounded by tall trees. The trees tower above you, climbing them would be impossible on your own. There is a bone in the thick brush. 
+#
+CANOPY
+You are high in the treetops. Their is a peculiar leaf shaped like an elephant's ear. The only way you can go is down, but the drop is quite far...
+#
+POND
+You are knee deep in the shallow end of a pond. You can see the shadow of what seems to be a whistle in the murky water. South of you is that mud puddle.
+#
+PIT
+You clumsily fell to your demise.
+#
+MUDTRAP
+You decided to crouch in the mud. Suddenly, you begin to sink. Unfortunately, you cannot breathe mud, and you drown :(
+#

@@ -1,10 +1,11 @@
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class Room {
+public class Room implements Serializable {
 	
 	//Room Description
-	private String roomName = "caveManHouse";
-	private String desc = null;
+	private String roomName = null;
+	private String id = null;
 	
 	//Room Position
 	private Room east;
@@ -13,24 +14,22 @@ public class Room {
 	private Room south;
 	private Room up;
 	private Room down;
+	
+	//Room Conditions
 	private boolean locked; //Is the room locked?
+	private String lockedMessage;
 	
 	/*
 	 * HashMap for Item Objects.
 	 */
 	private HashMap<String, Item> roomItems;
 	
-	//Constructor
+	//Constructors
 	public Room(String n, String d) {
 		roomName = n;
-		desc = d;
+		id = d;
 		roomItems = new HashMap<String, Item>();
-	}
-	
-	public Room(String n) {
-		roomName = n;
-		desc = null;
-		roomItems = new HashMap<String, Item>();
+		Game.addRoom(n, this); //Room object places self on map
 	}
 
 	//Getters
@@ -55,6 +54,10 @@ public class Room {
 		return locked;
 	}
 	
+	public void wasLocked() {
+		Game.print(lockedMessage);
+	}
+	
 	public String getName() {
 		return roomName;
 	}
@@ -76,13 +79,19 @@ public class Room {
 		}
 	}
 	
-	public void setLocked(boolean x) {
-		locked = x;
+	public void setLocked(boolean b) {
+		locked = b;
 	}
 	
-	public void setDesc(String s) {
-		desc = s;
+	public void setLocked(boolean b, String s) {
+		lockedMessage = s;
+		locked = b;
 	}
+	
+	public void setID(String s) {
+		setId(s);
+	}
+	
 	/*
 	 * addTwoWay method: 
 	 * 1. Creates an exit for this that leads to Room r in dir direction,
@@ -113,7 +122,7 @@ public class Room {
 	}
 	
 	/*
-	 * get item in room
+	 * Get item in room
 	 */
 	
 	public Item getItem(String name) {
@@ -140,7 +149,15 @@ public class Room {
 
 	//ToString
 	public String toString() {
-		return desc;
+		return Game.getRoomDesc(getId());
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	
