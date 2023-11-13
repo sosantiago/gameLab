@@ -26,4 +26,14 @@ public class Whistle extends Item {
 		}
 	}
 	
+	public void take() {
+		if (!isHeavy()) {
+			Game.addItem(Game.getCurrentRoom().removeItem(getName()));
+			Game.print("You took the " + getName() + ".");
+		} else {
+			Game.print(getName() + " is too heavy!");
+		}
+		Game.changeRoomId("pond", "POND1a");
+	}
+	
 }

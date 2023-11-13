@@ -15,6 +15,10 @@ public class Item implements Serializable{
 		setUsed(false);
 	}
 	
+	public void uniqueCommand(String s) {
+		if (command.equals)
+	}
+	
 	public void setHeavy(boolean b) {
 		heavy = b;
 	}
@@ -41,6 +45,15 @@ public class Item implements Serializable{
 	
 	public void use() {
 		Game.print("You can't use this item... yet.");
+	}
+	
+	public void take() {
+		if (!heavy) {
+			Game.addItem(Game.getCurrentRoom().removeItem(name));
+			Game.print("You took the " + name + ".");
+		} else {
+			Game.print(name + " is too heavy!");
+		}
 	}
 
 	public boolean isUsed() {

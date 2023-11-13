@@ -11,12 +11,18 @@ public class World {
 	Room caveManHouse = new Room("caveManHouse", "CAVE_HOUSE");
 	Room jungle = new Room("jungle", "JUNGLE");
 	Room canopy = new Room("canopy", "CANOPY");
-	Room pond = new Room("pond", "POND");
+	Room pond = new Room("pond", "POND1");
+	Room deepPond = new Room("deepPond", "DEEP1");
+	Room venice = new Room("venice", "VENICE1");
+	Room vinciHouse = new Room("vinciHouse", "VINCI1");
+	Room gallery = new Room("vinciGallery", "GALLERY1");
 	
 	
 	//Adding Items to Rooms
 	caveManHouse.addItem(new Club());
 	canopy.addItem(new elephantLeaf());
+	canopy.addItem(new Remote());
+	deepPond.addItem(new TimeMachine());
 	mudPuddle.addItem(new Item("mud", "It is a glob of smelly mud."));
 	pond.addItem(new Whistle());
 	caveManHouse.addItem(new Dog()); //Will likely become character, but it functions as I intend it to right now.

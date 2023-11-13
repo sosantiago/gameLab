@@ -34,7 +34,10 @@ public class Game {
 		} catch (FileNotFoundException e) {
 			print("You forgot a # in rooms.txt numbnuts.");
 		}
-		
+	}
+	
+	public static void changeRoomId(String key, String id) {
+		roomsMap.get(key).setID(id);
 	}
 	
 	public static void addRoom(String n, Room r) {
@@ -83,7 +86,7 @@ public class Game {
 	 */
 	public static void move(char dir) {
 		if (currentRoom.getName().equals("mudPuddle")) {
-			currentRoom.setId("MUD_PUDDLE1a");
+			currentRoom.setId("MUD_PUDDLE2");
 		} else if (currentRoom.getName().equals("jungle")) {
 			currentRoom.setLocked(true, "If you try to go back down, you will plummet to your death. Perhaps you possess a large, parachute like item that could allow you to go down easier?");
 		}
@@ -181,12 +184,7 @@ public class Game {
 				if (playerCommand.length==2) {
 					if (currentRoom.hasItem(playerCommand[1])){
 						Item item = currentRoom.getItem(playerCommand[1]);
-						if (!item.isHeavy()) {
-							inventory.add(currentRoom.removeItem(playerCommand[1]));
-							print("You took the " + playerCommand[1] + ".");
-						} else {
-							print(item + " is too heavy!");
-						}
+							item.take();
 					} else {
 						print("There is no " + playerCommand[1] + "!");
 					}
@@ -238,14 +236,15 @@ public class Game {
 					print("You bite your hand ferociously. Ouch.");
 				break;
 			/*
-			 * 
-			 * 
+			 * Dev commands, for testing use only
 			 */
 			case "dev":
 				if (playerCommand[1].equals("key")) { //DEV KEY: OPENS ALL DOORS
 					inventory.add(new DevKey());
 				} else if(playerCommand[1].equals("currentRoom")) { //PRINT() CURRENT ROOM DESCRIPTION
 					print(currentRoom);
+				} else if(playerCommand[1].equals("currentRoomName")) { //PRINT() CURRENT ROOM DESCRIPTION
+						print(currentRoom.getName());
 				} else { //PRINT DESC OF SELECT ROOM
 					print(roomsMap.get(playerCommand[1]));
 				}

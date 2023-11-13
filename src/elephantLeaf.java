@@ -6,8 +6,11 @@ public class elephantLeaf extends Item {
 	}
 
 	public void use() {
-		if(Game.getCurrentRoom().equals("canopy")) {
+		if(Game.getCurrentRoom().getName().equals("canopy")) {
 			Game.getCurrentRoom().getExit('d').setLocked(false);
+			Game.print("You ready the leaf above your head. It may be large enough to act as a parachute.");
+		} else {
+			Game.print("You fan yourself with the leaf. You feel refreshed.");
 		}
 	}
 }
