@@ -13,7 +13,7 @@ public class World {
 	Room canopy = new Room("canopy", "CANOPY");
 	Room pond = new Room("pond", "POND1");
 	Room deepPond = new Room("deepPond", "DEEP1");
-	Room venice = new Room("venice", "VENICE1");
+	Room venice = new Room("venice", "VENICE");
 	Room vinciHouse = new Room("vinciHouse", "VINCI1");
 	Room gallery = new Room("vinciGallery", "GALLERY1");
 	
@@ -27,6 +27,7 @@ public class World {
 	pond.addItem(new Whistle());
 	caveManHouse.addItem(new Dog()); //Will likely become character, but it functions as I intend it to right now.
 	jungle.addItem(new Bone());
+	gallery.addItem(new MonaLisa());
 	
 	
 	//Adding "exits" to Rooms
@@ -34,7 +35,10 @@ public class World {
 	mudPuddle.addTwoWay(jungle, 'w');
 	mudPuddle.addTwoWay(pond, 'n');
 	cave.addTwoWay(caveManHouse, 'e');
+	pond.addTwoWay(deepPond, 'd');
 	jungle.addTwoWay(canopy, 'u');
+	venice.addTwoWay(vinciHouse, 'e');
+	vinciHouse.addTwoWay(gallery, 'u');
 	
 	//Adding locks and traps
 	caveManHouse.setLocked(true, "You politely knocked on the door. There was a grunt from the inside.");

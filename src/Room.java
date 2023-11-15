@@ -140,6 +140,10 @@ public class Room implements Serializable {
 		getRoomItems().put(i.getName(), i);
 	}
 	
+	public void addNPC(Character c) {
+		
+	}
+	
 	/*
 	 * Check for item
 	 */

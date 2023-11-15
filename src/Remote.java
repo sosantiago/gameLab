@@ -8,7 +8,9 @@ public class Remote extends Item {
 	public void use() {
 		Game.print("You are overwhelmed by the sheer amount of buttons on the remote. "
 				+ "You anxiously press the \"Start\" button, anticipating to be brought back home immediately. However, you instead to hear a whirring from the pond.");
-		Game.changeRoomId("pond", "pond2");
+		Game.changeRoomId("pond", "POND2");
+		Game.changeRoomId("deepPond", "DEEP2");
+		Game.getOtherRoom("deepPond").getItem("machine").setUsed(true);
 	}
 
 }

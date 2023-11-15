@@ -17,6 +17,7 @@ public class Game {
 	private static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	private static boolean dead;
 	private static HashMap<String, Room> roomsMap = new HashMap<String, Room>();
+	public static Scanner input = new Scanner(System.in);
 	
 	/*
 	 * Populates roomDescs HashMap with room descriptions and their associated keys.
@@ -34,6 +35,10 @@ public class Game {
 		} catch (FileNotFoundException e) {
 			print("You forgot a # in rooms.txt numbnuts.");
 		}
+	}
+	
+	public static Room getOtherRoom(String key) {
+		return roomsMap.get(key);
 	}
 	
 	public static void changeRoomId(String key, String id) {
@@ -79,6 +84,10 @@ public class Game {
 	
 	public static Room getCurrentRoom() {
 		return currentRoom;
+	}
+	
+	public static void teleport(String s) {
+		currentRoom = roomsMap.get(s);
 	}
 	
 	/*
@@ -161,7 +170,6 @@ public class Game {
 		currentRoom = World.buildWorld();
 		
 		popDescs();
-		Scanner input = new Scanner(System.in);
 		String[] playerCommand;
 		boolean present = false;
 

@@ -14,11 +14,11 @@ public class Item implements Serializable{
 		heavy = false;
 		setUsed(false);
 	}
-	
+	/*
 	public void uniqueCommand(String s) {
 		if (command.equals)
 	}
-	
+	*/
 	public void setHeavy(boolean b) {
 		heavy = b;
 	}

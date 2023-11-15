@@ -28,9 +28,18 @@ You are knee deep in the shallow end of a pond. South of you is that mud puddle.
 POND2
 You are knee deep in the shallow end of a pond. South of you is that mud puddle. There is an ominous glowing light light coming from below...
 #
-PIT
-You clumsily fell to your demise.
+DEEP1
+You are now deep in the pond. There is an ominous machine... Could it be how you got here? You can swim back up.
 #
-MUDTRAP
-You decided to crouch in the mud. Suddenly, you begin to sink. Unfortunately, you cannot breathe mud, and you drown :(
+DEEP2
+You are now deep in the pond. The ominous machine is now open to enter! You can swim back up.
+#
+VENICE
+You are in the streets of Venice! How awesome! DaVinci's house is east! How convenient, but it may not be historically accurate.
+#
+VINCI1
+Your in DaVinci's house! Neat! Their is a ladder that leads up to his art gallery. That has got to be where the Mona Lisa is.
+#
+GALLERY1
+You are in DaVinci's art gallery, and... There it is! You found the Mona Lisa!!! Just take it and leave!
 #
