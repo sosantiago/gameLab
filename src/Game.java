@@ -88,6 +88,7 @@ public class Game {
 	
 	public static void teleport(String s) {
 		currentRoom = roomsMap.get(s);
+		Game.print(currentRoom);
 	}
 	
 	/*
@@ -141,6 +142,16 @@ public class Game {
 			}
 		}
 		return false;
+	}
+	
+	public static void bringNPC(String name) {
+		Character temp = null;
+		for (Room r : roomsMap.values()) {
+			if (r.getNPC(name).getName().equals(name)) { //Redundant but I see no need to fix it
+				temp=r.getNPC(name);
+			}
+		}
+		Game.currentRoom.addNPC(temp);
 	}
 	
 	public static void print(String message) {
@@ -219,6 +230,10 @@ public class Game {
 						currentRoom.getItem(playerCommand[1]).look();
 						present = true;
 					}
+					if (currentRoom.hasNPC(playerCommand[1])) {
+						currentRoom.getNPC(playerCommand[1]).look();
+						present = true;
+					}
 					if (!present) {
 						print("You don't have " + playerCommand[1] + "!");
 					}
@@ -268,6 +283,11 @@ public class Game {
 				} catch (IOException e) {
 					// TODO Auto-generated catch block
 					print("Cannot load save file.");
+				}
+				break;
+			case "talk":
+				if (playerCommand.length==2) {
+					currentRoom.getNPC(playerCommand[1]).talk();
 				}
 				break;
 			case "x":

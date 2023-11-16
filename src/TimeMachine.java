@@ -9,7 +9,7 @@ public class TimeMachine extends Item {
 	
 	public void use() {
 		if(isUsed()) {
-			Game.print("You quickly enter the time machine before you drown. You find yourself in the streets of Venice?!");
+			Game.print("You quickly enter the time machine before you drown.");
 			Game.teleport("venice");
 		} else {
 			Game.print("You try to enter the time machine, but it is closed.");

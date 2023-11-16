@@ -43,6 +43,10 @@ public class World {
 	//Adding locks and traps
 	caveManHouse.setLocked(true, "You politely knocked on the door. There was a grunt from the inside.");
 	
+	
+	//GAME LAB NPCS OBJECTIVES
+	mudPuddle.addNPC(new Puppy());
+	
 	return mudPuddle;
 	}
 	

@@ -1,6 +1,6 @@
-import java.util.Scanner;
+import java.io.Serializable;
 
-public class Character {
+public class Character implements Serializable {
 
 	private String name;
 	private String desc;
@@ -36,8 +36,9 @@ public class Character {
 	
 	public void getResponse(String[] options) {
 		for (int s=0; s<options.length; s++) {
-			Game.print("Option" + i+1 + ": " + options[s]);
+			Game.print("Option" + (s+1) + ": " + options[s]);
 		}
+		Game.print("What say you?");
 		int choice = Game.input.nextInt();
 		Game.input.nextLine();
 		response(choice);

@@ -11,7 +11,8 @@ public class Whistle extends Item {
 				Game.print("From the locked door comes a hulking cave-man."
 					+ " He threateningly gestures you. You want to run, but you also really want to invade his home.");
 				setUsed(true);
-				Game.getCurrentRoom().setID("CAVE1a");
+				Game.getCurrentRoom().setID("CAVE2");
+				Game.getCurrentRoom().addNPC(new CaveMan());
 				Game.getCurrentRoom().getExit('e').setLocked(true, "Do you really want to try and sneak past the cave man that is very clearly mad at you?");
 			} else {
 				Game.print("The cave-man lunged at you and ripped your face off. You knew he didn't like it! Should have been more considerate.");

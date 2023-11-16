@@ -23,15 +23,17 @@ public class Room implements Serializable {
 	private HashMap<String, String> moveMessages;
 	
 	/*
-	 * HashMap for Item Objects.
+	 * HashMap for Item and Character Objects.
 	 */
 	private HashMap<String, Item> roomItems;
+	private HashMap<String, Character> characters;
 	
 	//Constructors
 	public Room(String n, String d) {
 		roomName = n;
 		id = d;
 		roomItems = new HashMap<String, Item>();
+		characters = new HashMap<String, Character>();
 		moveMessages = new HashMap<String, String>(); //Messages to be said when specific moves are made.
 		Game.addRoom(n, this); //Room object places self on map
 	}
@@ -124,13 +126,18 @@ public class Room implements Serializable {
 	public Item removeItem(String name) {
 		return getRoomItems().remove(name);
 	}
+	public Character removeNPC(String name) {
+		return characters.remove(name);
+	}
 	
 	/*
 	 * Get item in room
 	 */
-	
 	public Item getItem(String name) {
 		return getRoomItems().get(name);
+	}
+	public Character getNPC(String name) {
+		return characters.get(name);
 	}
 	
 	/*
@@ -139,9 +146,8 @@ public class Room implements Serializable {
 	public void addItem(Item i) {
 		getRoomItems().put(i.getName(), i);
 	}
-	
 	public void addNPC(Character c) {
-		
+		characters.put(c.getName(), c);
 	}
 	
 	/*
@@ -149,6 +155,9 @@ public class Room implements Serializable {
 	 */
 	public boolean hasItem(String itemName) {
 		return getRoomItems().containsKey(itemName);
+	}
+	public boolean hasNPC(String NPCname) {
+		return characters.containsKey(NPCname);
 	}
 	
 	private HashMap<String, Item> getRoomItems() {
