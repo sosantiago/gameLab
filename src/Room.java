@@ -94,6 +94,53 @@ public class Room implements Serializable {
 		locked = b;
 	}
 	
+	/*
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * LOCK ALL COMMAND DOES NOT WORK!!!!!!!!
+	 * FIX IT!
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public void lockAll(String s) {
+		char[] x = Directions.get();
+		for(char d : x) {
+			if (!(Game.getCurrentRoom().getExit(d)==null)) {
+				if(Game.getCurrentRoom().getExit(d).isLocked()) {
+					Game.getCurrentRoom().getExit(d).setLocked(true, s);
+				}
+			}
+		}
+	}
+	
+	public boolean unlockAll() {
+		char[] x = Directions.get();
+		boolean u = false;
+		for(char d : x) {
+			if (!(Game.getCurrentRoom().getExit(d)==null)) {
+				if(Game.getCurrentRoom().getExit(d).isLocked()) {
+					Game.getCurrentRoom().getExit(d).setLocked(false);
+					u = true;
+				}
+			}
+		}
+		return u;
+	}
+	
 	public void setID(String s) {
 		setId(s);
 	}

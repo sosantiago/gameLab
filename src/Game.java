@@ -144,14 +144,33 @@ public class Game {
 		return false;
 	}
 	
+	public static Character findNPC(String name) {
+		for (Room r : roomsMap.values()) {
+			if (r.hasNPC(name)) { //Redundant but I see no need to fix it
+				return r.getNPC(name);
+			}
+		}
+		return null;
+	}
+	
 	public static void bringNPC(String name) {
 		Character temp = null;
 		for (Room r : roomsMap.values()) {
-			if (r.getNPC(name).getName().equals(name)) { //Redundant but I see no need to fix it
-				temp=r.getNPC(name);
+			if (r.hasNPC("caveman")) {
+				temp=r.removeNPC(name);
 			}
 		}
 		Game.currentRoom.addNPC(temp);
+	}
+	
+	public static void bringNPC(String name, String roomName) {
+		Character temp = null;
+		for (Room r : roomsMap.values()) {
+			if (r.hasNPC("caveman")) {
+				temp=r.removeNPC(name);
+			}
+		}
+		getOtherRoom(roomName).addNPC(temp);
 	}
 	
 	public static void print(String message) {
@@ -264,6 +283,8 @@ public class Game {
 			case "dev":
 				if (playerCommand[1].equals("key")) { //DEV KEY: OPENS ALL DOORS
 					inventory.add(new DevKey());
+				} else if (playerCommand[1].equals("lock")) { //DEV LOCK: LOCKS ALL DOORS
+					inventory.add(new DevLock());
 				} else if(playerCommand[1].equals("currentRoom")) { //PRINT() CURRENT ROOM DESCRIPTION
 					print(currentRoom);
 				} else if(playerCommand[1].equals("currentRoomName")) { //PRINT() CURRENT ROOM DESCRIPTION

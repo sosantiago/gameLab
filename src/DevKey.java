@@ -6,16 +6,7 @@ public class DevKey extends Item{
 	}
 	
 	public void use() {
-		char[] x = Directions.get();
-		boolean u = false;
-		for(char d : x) {
-			if (!(Game.getCurrentRoom().getExit(d)==null)) {
-				if(Game.getCurrentRoom().getExit(d).isLocked()) {
-					Game.getCurrentRoom().getExit(d).setLocked(false);
-					u = true;
-				}
-			}
-		}
+		boolean u = Game.getCurrentRoom().unlockAll();
 		if (u) {
 			Game.print("You unlocked every locked door in this room.");
 		} else {

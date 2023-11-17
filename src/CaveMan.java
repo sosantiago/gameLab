@@ -11,27 +11,34 @@ public class CaveMan extends Character{
 	
 	public void talk() {
 		if (angry) {
-		say("*Angry incoherent grunts*");
-		Game.print("He beats his fist against an open palm. All of that rock paper scissors practice may just pay off.");
-		String[] options = {
-				"*Rock*",
-				"*Paper*",
-				"*Scissors*"
-		};
-		getResponse(options);
-		} else {
-		say("WHAT YOU WANT NOW? I DON'T WANT TO TALK TO YOU!");
-		if (debt) {
-			say("WHAT YOU NEED FRIEND?");
-			if(Game.getCurrentRoom().getName().equals("jungle")) {
-			String[] options = {
-					"Could you get me up into the treetops? I can't climb those trees.",
-					"Nevermind, old chap."
-			};
+			if (Game.getCurrentRoom().getName().equals("cave")) {
+				say("*Angry incoherent grunts*");
+				Game.print("He beats his fist against an open palm. No time for apologies. All of that rock paper scissors practice may just pay off.");
+				String[] options = {
+						"*Rock*",
+						"*Paper*",
+						"*Scissors*"
+				};
+				getResponse(options);
 			} else {
-				say("JUST DON'T PLAY THAT WHISTLE AGAIN");
-				Game.print("He'll probably come to you when you blow it again, perhaps you could use that...");
+				say("LET'S TAKE THIS BACK TO CAVE PUNK!");
+				Game.getCurrentRoom().unlockAll();
+				Game.print("The cave man hobbles back to the cave, murmuring to himself.");
+				Game.bringNPC(this.getName(), "cave");
 			}
+		} else {
+			say("WHAT YOU WANT NOW? I DON'T WANT TO TALK TO YOU!");
+			if (debt) {
+				say("WHAT YOU NEED FRIEND?");
+				if(Game.getCurrentRoom().getName().equals("jungle")) {
+				String[] options = {
+						"Could you get me up into the treetops? I can't climb those trees.",
+						"Nevermind, old chap."
+				};
+				} else {
+					say("JUST DON'T PLAY THAT WHISTLE AGAIN.");
+					Game.print("He'll probably come to you when you blow it again, perhaps you could use that...");
+				}
 		}
 		}
 	}
@@ -63,6 +70,10 @@ public class CaveMan extends Character{
 				Game.teleport("canopy");
 			}
 		}
+	}
+	
+	public boolean getAnger() {
+		return angry;
 	}
 
 }
