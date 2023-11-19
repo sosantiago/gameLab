@@ -7,6 +7,11 @@ public class TimeMachine extends Item {
 		super("machine", "It is very obviously a time machine. I mean, look at it!");
 	}
 	
+	public TimeMachine(boolean b) {
+		super("machine", "It is very obviously a time machine. I mean, look at it!");
+		setUsed(b);
+	}
+	
 	public void use() {
 		if(isUsed()) {
 			Game.print("You enter the time machine.");
@@ -22,7 +27,7 @@ public class TimeMachine extends Item {
 					Game.teleport("bathroom");
 				}
 			}
-			if(Game.hasItem("timeresidue")) {Game.addItem(new TimeDust());}
+			Game.addItem(new TimeDust());
 		} else {
 			Game.print("You try to enter the time machine, but it is closed.");
 		}
@@ -30,6 +35,7 @@ public class TimeMachine extends Item {
 	
 	public void setMode(char x) {
 		mode = x;
+		Game.print("(Mode set to "+ mode + ")");
 	}
 
 }

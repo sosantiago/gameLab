@@ -76,7 +76,15 @@ Your bedroom! And woah! Another time machine! That must be how you went back in 
 HALLWAY1
 The hallway leads to the living room to the west. None of the other doors are unlocked? That's strange...
 #
-
+DYSTOPIA1
+You are in some weird place, full of towering monochrome skyscrapers... not really what you expected.
+#
+DYSTOPIA2
+You walk, but everything still looks the same. The city seems to span on forever...
+#
+BUTTERFLY
+You are in the stomach of the butterfly. There is two chairs, one of which is occupied by a squat old man.
+#
 
 
 

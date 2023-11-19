@@ -31,7 +31,7 @@ public class Character implements Serializable {
 		Game.print(name+": "+s);
 	}
 	
-	public void talk() throws ClassNotFoundException, IOException {
+	public void talk() throws IOException, ClassNotFoundException {
 		Game.print("You can't talk to "+name+".");
 	}
 	

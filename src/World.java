@@ -5,6 +5,8 @@ public class World {
 	
 	public static Room buildWorld() {
 		
+	char[] dir = Directions.get();
+		
 	//Creating Room objects
 	Room mudPuddle = new Room("mudPuddle", "MUD_PUDDLE1");
 	Room cave = new Room("cave", "CAVE1");
@@ -22,6 +24,7 @@ public class World {
 	Room livingroom = new Room ("livingroom", "LIVINGROOM1");
 	Room exit = new Room ("exit", "EXIT");
 	Room dystopia = new Room ("dystopia", "DYSTOPIA1");
+	Room butterfly = new Room ("butterfly", "BUTTERFLY");
 	
 	
 	//Adding Items and NPCs to Rooms
@@ -30,7 +33,7 @@ public class World {
 	canopy.addItem(new Remote());
 	deepPond.addItem(new TimeMachine());
 	bedroom.addItem(new Bed());
-	bedroom.addItem(new TimeMachine());
+	bedroom.addItem(new TimeMachine(true));
 	bathroom.addItem(new Toilet());
 	mudPuddle.addItem(new Item("mud", "It is a glob of smelly mud."));
 	pond.addItem(new Whistle());
@@ -40,6 +43,7 @@ public class World {
 	gallery.addItem(new TimeMachine());
 	
 	gallery.addNPC(new DaVinci());
+	butterfly.addNPC(new OldMan());
 	
 	
 	//Adding "exits" to Rooms
@@ -54,11 +58,16 @@ public class World {
 	bathroom.addTwoWay(bedroom, 's');
 	bedroom.addTwoWay(hallway, 'w');
 	hallway.addTwoWay(livingroom, 'w');
+	livingroom.addTwoWay(exit, 'w');
 	
+	for(char d : dir) {
+		dystopia.addExit(dystopia, d);
+	}
 	
 	
 	//Adding locks and traps
 	caveManHouse.setLocked(true, "You politely knocked on the door. There was a grunt from the inside.");
+	exit.setLocked(true, "You could leave your house, but you don't feel the need to.");
 	
 	
 	//Setting "movemessages" (used only once lol)

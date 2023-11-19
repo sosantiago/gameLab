@@ -9,12 +9,14 @@ import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.HashMap;
+import java.util.NoSuchElementException;
 
 public class Game {
 
 	private static Room currentRoom;
 	private static ArrayList<Item> inventory = new ArrayList<Item>();
 	private static HashMap<String, String> roomDescs = new HashMap<String, String>();
+	private static int countdown = 50; 
 	private static boolean dead;
 	private static boolean respawn;
 	private static HashMap<String, Room> roomsMap = new HashMap<String, Room>();
@@ -31,7 +33,11 @@ public class Game {
 				String key = scan.nextLine();
 				String desc = scan.nextLine();
 				roomDescs.put(key, desc);
-				scan.nextLine();
+				try {
+					scan.nextLine();
+				} catch (NoSuchElementException e) {
+					
+				}
 			}
 		} catch (FileNotFoundException e) {
 			print("You forgot a # in rooms.txt numbnuts.");
@@ -102,6 +108,10 @@ public class Game {
 		if (currentRoom.getName().equals("mudPuddle")) {
 			currentRoom.setId("MUD_PUDDLE2");
 		}
+		if (currentRoom.getName().equals("dystopia")) {
+			currentRoom.setId("DYSTOPIA2");
+			countdown--;
+		}
 		/*
 		 * Actual move command
 		 */
@@ -117,6 +127,10 @@ public class Game {
 			}
 		} else {
 			print("You can't go that way.");
+		}
+		if (countdown<=0&&!currentRoom.getName().equals("butterfly")) {
+			Game.print("A giant chrome butterfly slams down and swallows you.");
+			teleport("butterfly");
 		}
 	}
 	
@@ -315,6 +329,8 @@ public class Game {
 						respawn=true;
 						print("Auto-respawn set to: ON");
 					}
+				} else if (playerCommand[1].equals("teleport")) {
+					teleport(playerCommand[2]);
 				} else { //PRINT DESC OF SELECT ROOM
 					print(roomsMap.get(playerCommand[1]));
 				}

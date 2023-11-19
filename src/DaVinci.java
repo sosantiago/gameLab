@@ -39,6 +39,8 @@ public class DaVinci extends Character{
 					"Not for you, nerd."
 			};
 			getResponse(options);
+		} else {
+			say("What are you waiting for! Get out of here! And make sure not to bring anything with you!");
 		}
 	}
 	
@@ -75,13 +77,14 @@ public class DaVinci extends Character{
 			case 1:
 				say("Okay, just let me take that from you, do some calibrations, and you'll be set to go!");
 				Game.print("Da Vinci removes the residue from you with a weird futuristic pump and funnels it into the machine. It should be working now!");
+				Game.drop("timeresidue", false);
 				((Remote) Game.getItem("remote")).vinciDidIt();
+				state++;
 				break;
 			case 2:
 				say("Oh, well, have fun staying here then...");
 				break;
 			}
-			state++;
 		}
 	}
 	

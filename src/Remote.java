@@ -2,7 +2,7 @@ import java.io.IOException;
 
 public class Remote extends Item {
 
-	int vinci = 1;
+	int vinci = 2;
 	
 	public Remote() {
 		super("remote", "It is a futuristic remote. Perhaps this is what you need to go home?");
@@ -16,13 +16,6 @@ public class Remote extends Item {
 				"A button with Da Vinci on it. Bingo!",
 				"A button with a city building on it. Maybe it is how you get back home?"
 		};
-		/*
-		Game.print("You are overwhelmed by the sheer amount of buttons on the remote. "
-				+ "You anxiously press the \"Start\" button, anticipating to be brought back home immediately. However, you instead to hear a whirring from the pond.");
-		Game.changeRoomId("pond", "POND2");
-		Game.changeRoomId("deepPond", "DEEP2");
-		Game.getOtherRoom("deepPond").getItem("machine").setUsed(true);
-		*/
 		getResponse(options);
 	}
 	
@@ -37,32 +30,50 @@ public class Remote extends Item {
 	}
 	
 	public void response(int choice) throws ClassNotFoundException, IOException {
-		String[] rooms = {"deepPond", "bedroom", "venice"};
+		String[] rooms = {"deepPond", "bedroom", "vinciGallery"};
 		for (int i = 0; i < vinci; i++) {
 			switch (choice) {
 			case 1:
-				if (!Game.getOtherRoom(rooms[i]).getItem("machine").isUsed()) {
-					Game.print("You anxiously press the \"Start\" button, anticipating to be brought back home immediately. Something MUST have turned on.");
+				switch (i) {
+				case 0:
 					Game.changeRoomId("pond", "POND2");
 					Game.changeRoomId("deepPond", "DEEP2");
 					Game.getOtherRoom("deepPond").getItem("machine").setUsed(true);
-				} else {
-					Game.print("You pressed the start button again, but nothing happened.");
+					break;
+				case 1:
+					Game.changeRoomId("vinciGallery", "GALLERY3");
+					Game.getOtherRoom("vinciGallery").getItem("machine").setUsed(true);
+					break;
+				case 2:
+					Game.changeRoomId("bedroom", "BEDROOM2");
+					Game.getOtherRoom("bedroom").getItem("machine").setUsed(true);
+					break;
 				}
 				break;
 			case 2:
-				Game.print("You pressed the button with the caveman on it. A growling noise came from the remote.");
-				((TimeMachine) Game.getOtherRoom("deepPond").getItem("machine")).setMode('a');
+				((TimeMachine) Game.getOtherRoom(rooms[i]).getItem("machine")).setMode('a');
 				break;
 			case 3:
-				Game.print("You pressed the Da Vinci button. A funny \"hurrmmmm\" sound came from the remote.");
-				((TimeMachine) Game.getOtherRoom("deepPond").getItem("machine")).setMode('b');
+				((TimeMachine) Game.getOtherRoom(rooms[i]).getItem("machine")).setMode('b');
 				break;
 			case 4:
-				Game.print("You pressed the city-lookin' button. A car beeping sound came from the remote. Who made this?!");
-				((TimeMachine) Game.getOtherRoom("deepPond").getItem("machine")).setMode('c');
+				((TimeMachine) Game.getOtherRoom(rooms[i]).getItem("machine")).setMode('c');
 				break;
 			}
+		}
+		switch (choice) {
+		case 1:
+			Game.print("You anxiously press the \"Start\" button, anticipating to be brought back home immediately. Something MUST have turned on.");
+			break;
+		case 2:
+			Game.print("You pressed the button with the caveman on it. A growling noise came from the remote.");
+			break;
+		case 3:
+			Game.print("You pressed the Da Vinci button. A funny \"hurrmmmm\" sound came from the remote.");
+			break;
+		case 4:
+			Game.print("You pressed the city-lookin' button. A car beeping sound came from the remote. Who made this?!");
+			break;
 		}
 	}
 	
@@ -77,6 +88,7 @@ public class Remote extends Item {
 	
 	public void vinciDidIt() {
 		vinci++;
+		Game.print("Vinci variable is now: " + vinci);
 	}
 	
 	public int getVinci() {
