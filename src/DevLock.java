@@ -6,7 +6,12 @@ public class DevLock extends Item {
 	}
 		
 	public void use() {
-		Game.getCurrentRoom().lockAll("Yup, that's locked alright.");
+		boolean u = Game.getCurrentRoom().lockAll("Yup, that's locked alright.");
+		if (u) {
+			Game.print("You locked every door in this room.");
+		} else {
+			Game.print("Locking failed.");
+		}
 	}
 
 }

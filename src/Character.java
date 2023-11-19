@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Character implements Serializable {
@@ -30,11 +31,11 @@ public class Character implements Serializable {
 		Game.print(name+": "+s);
 	}
 	
-	public void talk() {
+	public void talk() throws ClassNotFoundException, IOException {
 		Game.print("You can't talk to "+name+".");
 	}
 	
-	public void getResponse(String[] options) {
+	public void getResponse(String[] options) throws ClassNotFoundException, IOException {
 		for (int s=0; s<options.length; s++) {
 			Game.print("Option" + (s+1) + ": " + options[s]);
 		}
@@ -44,7 +45,7 @@ public class Character implements Serializable {
 		response(choice);
 	}
 	
-	public void response(int choice) {
+	public void response(int choice) throws ClassNotFoundException, IOException {
 		
 	}
 	

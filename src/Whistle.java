@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Whistle extends Item {
 	
@@ -5,7 +6,7 @@ public class Whistle extends Item {
 		super("whistle", "It is a primitive whistle.");
 	}
 
-	public void use() {
+	public void use() throws ClassNotFoundException, IOException {
 		if(isUsed()) {
 			boolean angry = ((CaveMan) Game.findNPC("caveman")).getAnger();
 		}
@@ -13,6 +14,7 @@ public class Whistle extends Item {
 		if(Game.getCurrentRoom().hasNPC("caveman")) {
 			Game.print("The cave-man lunged at you and ripped your face off. You knew he didn't like it! Should have been more considerate.");
 			Game.die();
+			return;
 		}
 		
 		if(Game.getCurrentRoom().getName().equals("cave")) {
@@ -30,9 +32,18 @@ public class Whistle extends Item {
 					+ " a loud, piercing cry. You hear a startled grunt"
 					+ " deep in the cave.");
 			} else {
-				Game.getCurrentRoom().lockAll("caveman: NUH UH. YOU TALK TO ME FIRST WIMP.");
-				Game.bringNPC("caveman");
-				Game.print("The caveman ran to " + Game.getCurrentRoom().getName() + " in a blind rage. You should probably try to apologize.");
+				if(Game.getCurrentRoom().isAccessable()) {
+					if(((CaveMan) Game.findNPC("caveman")).getAnger()) {
+						Game.getCurrentRoom().lockAll("caveman: NUH UH. YOU TALK TO ME FIRST WIMP.");
+						Game.bringNPC("caveman");
+						Game.print("The caveman ran to " + Game.getCurrentRoom().getName() + " in a blind rage. You should probably try to apologize.");
+					} else {
+						Game.bringNPC("caveman");
+						Game.print("The caveman runs to you. He looks frusterated, but you don't think he is going to kill you.");
+					}
+				} else {
+					Game.print("You blew the whistle, but nobody came.");
+				}
 			}
 		}
 	}

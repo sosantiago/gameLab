@@ -6,11 +6,24 @@ public class elephantLeaf extends Item {
 	}
 
 	public void use() {
-		if(Game.getCurrentRoom().getName().equals("canopy")) {
-			Game.getCurrentRoom().getExit('d').setLocked(false);
-			Game.print("You ready the leaf above your head. It may be large enough to act as a parachute.");
+		if(Game.getCurrentRoom().getName().equals("canopy")&&Game.hasItem("elephantleaf")) {
+			boolean u = Game.getCurrentRoom().unlockAll();
+			if (u) {
+				Game.print("You ready the leaf above your head. It may be large enough to act as a parachute.");
+			} else {
+				Game.print("Huh?");
+			}
 		} else {
 			Game.print("You fan yourself with the leaf. You feel refreshed.");
+		}
+	}
+	
+	public void take() {
+		super.take();
+		if (Game.getOtherRoom("canopy").getId().equals("CANOPY1b")) {
+			Game.getOtherRoom("canopy").setID("CANOPY1ab");
+		} else {
+			Game.getOtherRoom("canopy").setID("CANOPY1a");
 		}
 	}
 }

@@ -16,6 +16,7 @@ public class Game {
 	private static ArrayList<Item> inventory = new ArrayList<Item>();
 	private static HashMap<String, String> roomDescs = new HashMap<String, String>();
 	private static boolean dead;
+	private static boolean respawn;
 	private static HashMap<String, Room> roomsMap = new HashMap<String, Room>();
 	public static Scanner input = new Scanner(System.in);
 	
@@ -95,16 +96,22 @@ public class Game {
 	 * How you, as a character, move around.
 	 */
 	public static void move(char dir) {
+		/*
+		 * Change rooms when you leave here:
+		 */
 		if (currentRoom.getName().equals("mudPuddle")) {
 			currentRoom.setId("MUD_PUDDLE2");
-		} else if (currentRoom.getName().equals("jungle")) {
-			currentRoom.setLocked(true, "If you try to go back down, you will plummet to your death. Perhaps you possess a large, parachute like item that could allow you to go down easier?");
 		}
+		/*
+		 * Actual move command
+		 */
 		Room nextRoom = currentRoom.getExit(dir);
 		if (nextRoom != null) {
 			if(nextRoom.isLocked()) {
 				nextRoom.wasLocked();
 			} else {
+				if (currentRoom.getMoveMessage()!=null)
+					print(currentRoom.getMoveMessage());
 				currentRoom = currentRoom.getExit(dir);
 				print(currentRoom);
 			}
@@ -113,11 +120,13 @@ public class Game {
 		}
 	}
 	
-	public static void drop(String name) {
-		for (Item i : inventory) {
-			if(i.getName().equals(name)) {
-				currentRoom.addItem(i);
+	public static void drop(String name, boolean stay) {
+		for (int i = 0; i<inventory.size(); i++) {
+			if(inventory.get(i).getName().equals(name)) {
+				if (stay)
+					currentRoom.addItem(inventory.get(i));
 				inventory.remove(i);
+				i--;
 			}
 		}
 	}
@@ -185,9 +194,13 @@ public class Game {
 		System.out.println(message+"\n");
 	}
 	
-	public static void die() {
-		dead = true;
-		print("GAME OVER.");
+	public static void die() throws ClassNotFoundException, IOException {
+		if (respawn) {
+			loadGame();
+		} else {
+			dead = true;
+			print("GAME OVER.");
+		}
 	}
 	
 	/*
@@ -195,7 +208,7 @@ public class Game {
 	 * 
 	 * WHERE THE MAGIC HAPPENS.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, IOException {
 		
 		currentRoom = World.buildWorld();
 		
@@ -262,12 +275,12 @@ public class Game {
 				break;
 			case "use":
 				if (playerCommand.length==2) {
-					if (hasItem(playerCommand[1])) {
-						getItem(playerCommand[1]).use();
-						present = true;
-					}
 					if (currentRoom.hasItem(playerCommand[1])) {
 						currentRoom.getItem(playerCommand[1]).use();
+						present = true;
+					}
+					if (hasItem(playerCommand[1])) {
+						getItem(playerCommand[1]).use();
 						present = true;
 					}
 					if (!present) {
@@ -283,12 +296,25 @@ public class Game {
 			case "dev":
 				if (playerCommand[1].equals("key")) { //DEV KEY: OPENS ALL DOORS
 					inventory.add(new DevKey());
+					print("You created a devkey.");
 				} else if (playerCommand[1].equals("lock")) { //DEV LOCK: LOCKS ALL DOORS
 					inventory.add(new DevLock());
+					print("You created a devlock.");
+				} else if (playerCommand[1].equals("remote")) { //DEV LOCK: LOCKS ALL DOORS
+					inventory.add(new Remote());
+					print("You created a remote.");
 				} else if(playerCommand[1].equals("currentRoom")) { //PRINT() CURRENT ROOM DESCRIPTION
 					print(currentRoom);
 				} else if(playerCommand[1].equals("currentRoomName")) { //PRINT() CURRENT ROOM DESCRIPTION
-						print(currentRoom.getName());
+					print(currentRoom.getName());
+				} else if(playerCommand[1].equals("respawn")) {
+					if (respawn) {
+						respawn=false;
+						print("Auto-respawn set to: OFF");
+					} else {
+						respawn=true;
+						print("Auto-respawn set to: ON");
+					}
 				} else { //PRINT DESC OF SELECT ROOM
 					print(roomsMap.get(playerCommand[1]));
 				}
@@ -308,7 +334,13 @@ public class Game {
 				break;
 			case "talk":
 				if (playerCommand.length==2) {
-					currentRoom.getNPC(playerCommand[1]).talk();
+					if (currentRoom.hasNPC(playerCommand[1])) {
+						currentRoom.getNPC(playerCommand[1]).talk();
+					} else {
+						print("There is no " + playerCommand[1] + ", silly!");
+					}
+				} else {
+					print("You mumble to yourself.");
 				}
 				break;
 			case "x":

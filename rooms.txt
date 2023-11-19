@@ -2,7 +2,10 @@ MUD_PUDDLE1
 You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are.
 #
 MUD_PUDDLE2
-You are once again standing in the mud. For some strange reason, you keep stepping in it. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond. You're still not quite sure of your goal at this point.
+You are once again standing in the mud. For some strange reason, you keep stepping in it. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond. You still feel that you might be able to steal the Mona Lisa, but you're not sure how...
+#
+MUD_PUDDLE3
+Really? Back here at in that mud puddle again? That stinks... East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond.
 #
 CAVE1
 You are in a dark cave. The west is the way you came from. To your east, there is a locked door make of tree-bark.
@@ -10,14 +13,29 @@ You are in a dark cave. The west is the way you came from. To your east, there i
 CAVE2
 You are in a dark cave. The west is the way you came from. To your east stands the caveman that YOU angered, blocking the path into his home.
 #
+CAVE3
+You are in a dark cave. The west is the way you came from. The caveman is no longer guarding his door.
+#
 CAVE_HOUSE
 You are inside of a small well-lit room. It is furnished with crude chairs and a large bed, and a wooden club lie on a weapons rack. On the bed lie a large, hairy creature you can only identify as a dog. You can exit west.
 #
-JUNGLE
+JUNGLE1
 You are in a large clearing, surrounded by tall trees. The trees tower above you, climbing them would be impossible on your own. There is a bone in the thick brush. 
 #
-CANOPY
-You are high in the treetops. Their is a peculiar leaf shaped like an elephant's ear. The only way you can go is down, but the drop is quite far...
+JUNGLE1a
+You are in a large clearing, surrounded by tall trees. The trees tower above you, climbing them would be impossible on your own. 
+#
+CANOPY1
+You are high in the treetops. There is a peculiar leaf shaped like an elephant's ear. The only way you can go is down, but the drop is quite far... Also, there is something that looks like a TV remote?
+#
+CANOPY1a
+You are high in the treetops. The only way you can go is down, but the drop is quite far... Also, there is something that looks like a TV remote?
+#
+CANOPY1b
+You are high in the treetops. There is a peculiar leaf shaped like an elephant's ear. The only way you can go is down, but the drop is quite far... 
+#
+CANOPY1ab
+You are high in the treetops. The only way you can go is down, but the drop is quite far...
 #
 POND1
 You are knee deep in the shallow end of a pond. You can see the shadow of what seems to be a whistle in the murky water. South of you is that mud puddle. You can go deeper, but there doesn't seem to be a purpose to at this moment.
@@ -38,8 +56,29 @@ VENICE
 You are in the streets of Venice! How awesome! DaVinci's house is east! How convenient, but it may not be historically accurate.
 #
 VINCI1
-Your in DaVinci's house! Neat! Their is a ladder that leads up to his art gallery. That has got to be where the Mona Lisa is.
+You're in DaVinci's house! Neat! Their is a ladder that leads up to his art gallery.
 #
 GALLERY1
-You are in DaVinci's art gallery, and... There it is! You found the Mona Lisa!!! Just take it and leave!
+You are in DaVinci's art gallery. He's standing in there! And the Mona Lisa is right there! Also, there is a time machine in the corner of the room?
 #
+GALLERY2
+You are in DaVinci's art gallery. Da Vinci is still standing there. The time machine is also still there, inactive.
+#
+GALLERY3
+You are in DaVinci's art gallery. Da Vinci is still standing there. The time machine is online and ready to go!
+#
+BATHROOM1
+Home sweet home! In the comfort of your own toilet! Amazing, but there isn't anything in here that you need! To the south of you is your bedroom.
+#
+BEDROOM1
+Your bedroom! And woah! Another time machine! That must be how you went back in time. To the west is a hallway.
+#
+HALLWAY1
+The hallway leads to the living room to the west. None of the other doors are unlocked? That's strange...
+#
+
+
+
+
+
+

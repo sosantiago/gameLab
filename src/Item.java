@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.io.Serializable;
 
 public class Item implements Serializable{
@@ -43,7 +44,7 @@ public class Item implements Serializable{
 		this.desc = desc;
 	}
 	
-	public void use() {
+	public void use() throws ClassNotFoundException, IOException {
 		Game.print("You can't use this item... yet.");
 	}
 	

@@ -1,3 +1,4 @@
+import java.io.IOException;
 
 public class Puppy extends Character {
 	
@@ -8,7 +9,7 @@ public class Puppy extends Character {
 			state = 0;
 	}
 	@Override
-	public void talk() {
+	public void talk() throws ClassNotFoundException, IOException {
 		if (state==0) {
 			say("Hi! I'm an adorable puppy!");
 			String[] options = {

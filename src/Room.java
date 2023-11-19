@@ -19,8 +19,9 @@ public class Room implements Serializable {
 	private boolean locked; //Is the room locked?
 	private String lockedMessage;
 	
-	//Move Messages
-	private HashMap<String, String> moveMessages;
+	//Miscellaneous
+	private String moveMessage;
+	private boolean accessable;
 	
 	/*
 	 * HashMap for Item and Character Objects.
@@ -33,8 +34,7 @@ public class Room implements Serializable {
 		roomName = n;
 		id = d;
 		roomItems = new HashMap<String, Item>();
-		characters = new HashMap<String, Character>();
-		moveMessages = new HashMap<String, String>(); //Messages to be said when specific moves are made.
+		characters = new HashMap<String, Character>(); //Messages to be said when specific moves are made.
 		Game.addRoom(n, this); //Room object places self on map
 	}
 
@@ -83,6 +83,7 @@ public class Room implements Serializable {
 		} else if (dir == 'd'){
 			down = r;
 		}
+		r.setAccessable(true);
 	}
 	
 	public void setLocked(boolean b) {
@@ -116,15 +117,16 @@ public class Room implements Serializable {
 	 * 
 	 * 
 	 */
-	public void lockAll(String s) {
+	public boolean lockAll(String s) {
 		char[] x = Directions.get();
+		boolean u = false;
 		for(char d : x) {
 			if (!(Game.getCurrentRoom().getExit(d)==null)) {
-				if(Game.getCurrentRoom().getExit(d).isLocked()) {
-					Game.getCurrentRoom().getExit(d).setLocked(true, s);
-				}
+				Game.getCurrentRoom().getExit(d).setLocked(true, s);
+				u = true;
 			}
 		}
+		return u;
 	}
 	
 	public boolean unlockAll() {
@@ -222,6 +224,22 @@ public class Room implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public void setMoveMessage(String s) {
+		moveMessage = s;
+	}
+	
+	public String getMoveMessage() {
+		return moveMessage;
+	}
+	
+	public void setAccessable(boolean b){
+		accessable=b;
+	}
+	
+	public boolean isAccessable(){
+		return accessable;
 	}
 
 	
