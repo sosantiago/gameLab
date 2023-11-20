@@ -3,6 +3,7 @@ public class Club extends Item{
 	
 	public Club() {
 		super("woodenclub", "It is a large, unwieldy wooden club.");
+		setDMG(50);
 	}
 	
 	public void use() {

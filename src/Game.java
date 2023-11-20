@@ -16,6 +16,7 @@ public class Game {
 	private static Room currentRoom;
 	private static ArrayList<Item> inventory = new ArrayList<Item>();
 	private static HashMap<String, String> roomDescs = new HashMap<String, String>();
+	private static int hp = 100;
 	private static int countdown = 50; 
 	private static boolean dead;
 	private static boolean respawn;
@@ -196,6 +197,17 @@ public class Game {
 		getOtherRoom(roomName).addNPC(temp);
 	}
 	
+	/*
+	 * Combat!
+	 */
+	public static void takeDMG(int rcl) {
+		hp-=rcl;
+	}
+	
+	public static int getHP() {
+		return hp;
+	}
+	
 	public static void print(String message) {
 		System.out.print(message+"\n");
 	}
@@ -357,6 +369,24 @@ public class Game {
 					}
 				} else {
 					print("You mumble to yourself.");
+				}
+				break;
+			case "give":
+				Item i;
+				if (hasItem(playerCommand[1])&&playerCommand[2].equals("to")&&currentRoom.hasNPC(playerCommand[3])) {
+					i = getItem(playerCommand[1]);
+					currentRoom.getNPC(playerCommand[3]).give(i);
+				} else {
+					print("This command is invalid.");
+				}
+				break;
+			case "attack":
+				Item i1;
+				if (hasItem(playerCommand[3])&&playerCommand[2].equals("with")&&currentRoom.hasNPC(playerCommand[1])) {
+					i1 = getItem(playerCommand[3]);
+					currentRoom.getNPC(playerCommand[1]).attack(i1);
+				} else {
+					print("This command is invalid.");
 				}
 				break;
 			case "x":

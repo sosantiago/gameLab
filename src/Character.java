@@ -1,10 +1,15 @@
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class Character implements Serializable {
 
 	private String name;
 	private String desc;
+	private int atk;
+	private int hp;
+	private ArrayList<Item> npcInv;
 	
 	public Character(String name) {
 		this.name = name;
@@ -13,6 +18,8 @@ public class Character implements Serializable {
 	public Character(String name, String s) {
 		this.name = name;
 		this.desc = s;
+		hp = 100;
+		npcInv = new ArrayList<Item>();
 	}
 	
 	public String getName() {
@@ -47,6 +54,30 @@ public class Character implements Serializable {
 	
 	public void response(int choice) throws ClassNotFoundException, IOException {
 		
+	}
+	
+	public void give (Item i) {
+		npcInv.add(i);
+		Game.print("You gave your " + i.getName() + " to " + name + ".");
+		Game.drop(i.getName(), false);
+	}
+	
+	public void attack (Item weapon) {
+		Random r = new Random();
+		int roll = r.nextInt(20)-10;
+		int dmg = weapon.getDMG()+roll;
+		hp -= dmg;
+		int rcl = atk-dmg;
+		String rcls = "";
+		if(rcl>0) {
+			rcls=" You took " + rcl + " DMG in the process!";
+		}
+		Game.print("You attacked " + name + " with " + weapon.getName() + "! You dealt " + dmg + " DMG!" + rcls);
+		Game.takeDMG(rcl);
+		if(Game.getHP()>=0) {
+			Game.print(name + " killed you!");
+			Game.die();
+		}
 	}
 	
 }
