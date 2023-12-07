@@ -8,7 +8,7 @@ public class World {
 	char[] dir = Directions.get();
 		
 	//Creating Room objects
-	Room mudPuddle = new Room("mudPuddle", "MUD_PUDDLE1");
+	Room mudPuddle = new Room("mudPuddle", "MUD_PUDDLE1a");
 	Room cave = new Room("cave", "CAVE1");
 	Room caveManHouse = new Room("caveManHouse", "CAVE_HOUSE");
 	Room jungle = new Room("jungle", "JUNGLE1");
@@ -28,14 +28,13 @@ public class World {
 	
 	
 	//Adding Items and NPCs to Rooms
-	caveManHouse.addItem(new Club());
 	canopy.addItem(new elephantLeaf());
 	canopy.addItem(new Remote());
 	deepPond.addItem(new TimeMachine());
 	bedroom.addItem(new Bed());
 	bedroom.addItem(new TimeMachine(true));
 	bathroom.addItem(new Toilet());
-	mudPuddle.addItem(new Item("mud", "It is a glob of smelly mud."));
+	mudPuddle.addItem(new Guide());
 	pond.addItem(new Whistle());
 	caveManHouse.addItem(new Dog()); //Will likely become character, but it functions as I intend it to right now.
 	jungle.addItem(new Bone());
@@ -69,13 +68,6 @@ public class World {
 	caveManHouse.setLocked(true, "You politely knocked on the door. There was a grunt from the inside.");
 	exit.setLocked(true, "You could leave your house, but you don't feel the need to.");
 	
-	
-	//Setting "movemessages" (used only once lol)
-	canopy.setMoveMessage("You gracefully float down with the help of the leaf.");
-	
-	
-	//GAME LAB NPCS OBJECTIVES
-	mudPuddle.addNPC(new Puppy());
 	
 	return mudPuddle;
 	}

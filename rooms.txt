@@ -1,8 +1,14 @@
-MUD_PUDDLE1
-You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are.
+MUD_PUDDLE1a
+You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are... there is also a note in the mud.
 #
-MUD_PUDDLE2
-You are once again standing in the mud. For some strange reason, you keep stepping in it. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond. You still feel that you might be able to steal the Mona Lisa, but you're not sure how...
+MUD_PUDDLE1b
+You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are...
+#
+MUD_PUDDLE2a
+You are in the mud puddle. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond. You still feel that you might be able to steal the Mona Lisa, but you're not sure how...
+#
+MUD_PUDDLE2b
+You are in the mud puddle. East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond. You still feel that you might be able to steal the Mona Lisa, but you're not sure how...
 #
 MUD_PUDDLE3
 Really? Back here at in that mud puddle again? That stinks... East of you is the entrance of a cave, and to the west a vast jungle, and to the north a pond.

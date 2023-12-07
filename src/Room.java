@@ -36,6 +36,7 @@ public class Room implements Serializable {
 		roomItems = new HashMap<String, Item>();
 		characters = new HashMap<String, Character>(); //Messages to be said when specific moves are made.
 		Game.addRoom(n, this); //Room object places self on map
+		setMoveMessage("You went to " + roomName + ".");
 	}
 
 	//Getters

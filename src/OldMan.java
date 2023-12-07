@@ -19,6 +19,8 @@ public class OldMan extends Character {
 			getResponse(options);
 		} else {
 			say("And no, there is no way out. Have fun here, forever.");
+			Game.print("THE END");
+			Game.die();
 		}
 	}
 

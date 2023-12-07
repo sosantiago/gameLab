@@ -8,7 +8,6 @@ public class Item implements Serializable{
 	private String desc;
 	private boolean heavy;
 	private boolean used;
-	private int dmg;
 	
 	public Item(String name, String desc) {
 		this.name = name;
@@ -39,7 +38,7 @@ public class Item implements Serializable{
 	}
 
 	public void look() {
-		System.out.println(desc);
+		Game.print(desc);
 	}
 
 	public void setDesc(String desc) {
@@ -66,14 +65,5 @@ public class Item implements Serializable{
 	public void setUsed(boolean used) {
 		this.used = used;
 	}
-	
-	public void setDMG(int x) {
-		dmg = x;
-	}
-	
-	public int getDMG() {
-		return dmg;
-	}
-	
 	
 }

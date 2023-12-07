@@ -12,6 +12,8 @@ public class CaveMan extends Character{
 	
 	public void talk() throws ClassNotFoundException, IOException {
 		
+		Game.setTalkingTo(getName());
+		Game.gui.setConvo(true);
 		if (angry) {
 			if (Game.getCurrentRoom().getName().equals("cave")) {
 				say("*Angry incoherent grunts*");
@@ -129,6 +131,9 @@ public class CaveMan extends Character{
 				}
 			}
 		}
+		
+		Game.gui.setConvo(false);
+		Game.setTalkingTo("no one");
 	}
 	
 	public boolean getAnger() {

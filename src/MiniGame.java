@@ -13,6 +13,18 @@ public class MiniGame {
 		Random x = new Random();
 		int opponent = x.nextInt(3);
 		
+		switch(you) {
+		case 0:
+			Game.print("You chose rock.");
+			break;
+		case 1:
+			Game.print("You chose paper.");
+			break;
+		case 2:
+			Game.print("You chose scissors.");
+			break;
+		}
+		
 		switch(opponent) {
 		case 0:
 			Game.print("Your opponent chose rock.");

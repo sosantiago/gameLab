@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class Remote extends Item {
+public class Remote extends Item{
 
 	int vinci = 2;
 	
@@ -23,7 +23,15 @@ public class Remote extends Item {
 		for (int s=0; s<options.length; s++) {
 			Game.print("Option" + (s+1) + ": " + options[s]);
 		}
-		Game.print("What will you press?");
+		Game.gui.prompt("What will you press?");
+		
+		/*
+		 * 
+		 * 
+		 * FIX REMOTE
+		 * 
+		 * 
+		 */
 		int choice = Game.input.nextInt();
 		Game.input.nextLine();
 		response(choice);

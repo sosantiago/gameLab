@@ -16,12 +16,16 @@ public class Game {
 	private static Room currentRoom;
 	private static ArrayList<Item> inventory = new ArrayList<Item>();
 	private static HashMap<String, String> roomDescs = new HashMap<String, String>();
-	private static int hp = 100;
-	private static int countdown = 50; 
+	private static int countdown = 10; 
 	private static boolean dead;
 	private static boolean respawn;
 	private static HashMap<String, Room> roomsMap = new HashMap<String, Room>();
 	public static Scanner input = new Scanner(System.in);
+	private static String[] playerCommand;
+	private static boolean present = false;
+	private static String talkingTo = "no one";
+	
+	public static GameGUI gui;
 	
 	/*
 	 * Populates roomDescs HashMap with room descriptions and their associated keys.
@@ -41,8 +45,21 @@ public class Game {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			print("You forgot a # in rooms.txt numbnuts.");
+			print("You forgot a # in rooms.txt, numbnuts.");
 		}
+	}
+	
+	public static boolean getDead() {
+		return dead;
+	}
+	
+	public static String[] getPlayerCommand() {
+		return playerCommand;
+	}
+	
+	public static void setPlayerCommand(String s) {
+		String [] temp = s.split(" ");
+		playerCommand = temp;
 	}
 	
 	public static Room getOtherRoom(String key) {
@@ -106,8 +123,8 @@ public class Game {
 		/*
 		 * Change rooms when you leave here:
 		 */
-		if (currentRoom.getName().equals("mudPuddle")) {
-			currentRoom.setId("MUD_PUDDLE2");
+		if (currentRoom.getId().equals("MUDPUDDLE1a")) {
+			currentRoom.setId("MUD_PUDDLE2a");
 		}
 		if (currentRoom.getName().equals("dystopia")) {
 			currentRoom.setId("DYSTOPIA2");
@@ -121,10 +138,9 @@ public class Game {
 			if(nextRoom.isLocked()) {
 				nextRoom.wasLocked();
 			} else {
-				if (currentRoom.getMoveMessage()!=null)
-					print(currentRoom.getMoveMessage());
 				currentRoom = currentRoom.getExit(dir);
-				print(currentRoom);
+				gui.print(currentRoom.getMoveMessage());
+				gui.room(currentRoom.toString());
 			}
 		} else {
 			print("You can't go that way.");
@@ -198,26 +214,23 @@ public class Game {
 	}
 	
 	/*
-	 * Combat!
+	 * Print Commands
 	 */
-	public static void takeDMG(int rcl) {
-		hp-=rcl;
-	}
-	
-	public static int getHP() {
-		return hp;
-	}
-	
 	public static void print(String message) {
-		System.out.print(message+"\n");
+		gui.print(message);
+		//System.out.print(message+"\n");
 	}
 	
 	public static void print(Item message) {
-		System.out.println(message+"\n");
+		String s = message.toString();
+		gui.print(s);
+		//System.out.println(message+"\n");
 	}
 	
 	public static void print(Room message) {
-		System.out.println(message+"\n");
+		String s = message.toString();
+		gui.print(s);
+		//System.out.println(message+"\n");
 	}
 	
 	public static void die() throws ClassNotFoundException, IOException {
@@ -227,6 +240,163 @@ public class Game {
 			dead = true;
 			print("GAME OVER.");
 		}
+	}
+	
+	
+	/*
+	 * WHERE THE MAAAGGGIIIIICCCCC REALLY HAPPENS
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public static void gameMethod() throws ClassNotFoundException, IOException {
+		gui.prompt("What do you want to do? ");
+		playerCommand = gui.getTextField().getText().split(" ");
+		switch(playerCommand[0]) {
+		case "e":
+		case "w":
+		case "n":
+		case "s":
+		case "u":
+		case "d":
+			move(playerCommand[0].charAt(0));
+			break;
+		case "take":
+			if (playerCommand.length==2) {
+				if (currentRoom.hasItem(playerCommand[1])){
+					Item item = currentRoom.getItem(playerCommand[1]);
+						item.take();
+				} else {
+					print("There is no " + playerCommand[1] + "!");
+				}
+			} else
+				print("You violently grasped at the air. You took nothing.");
+			break;
+		case "i":
+			print("You are currently holding:");
+			if(inventory.isEmpty()) {
+				print("You are holding nothing");
+			} else {
+				for (Item i : inventory) {
+					print(i);
+				}
+			}
+			break;
+		case "look":
+			if (playerCommand.length==2) {
+				if (hasItem(playerCommand[1])) {
+					getItem(playerCommand[1]).look();
+					present = true;
+				}
+				if (currentRoom.hasItem(playerCommand[1])) {
+					currentRoom.getItem(playerCommand[1]).look();
+					present = true;
+				}
+				if (currentRoom.hasNPC(playerCommand[1])) {
+					currentRoom.getNPC(playerCommand[1]).look();
+					present = true;
+				}
+				if (!present) {
+					print("You don't have " + playerCommand[1] + "!");
+				}
+			present = false;
+			} else
+				print("You simply just... observe...");
+			break;
+		case "use":
+			if (playerCommand.length==2) {
+				if (currentRoom.hasItem(playerCommand[1])) {
+					currentRoom.getItem(playerCommand[1]).use();
+					present = true;
+				}
+				if (hasItem(playerCommand[1])) {
+					getItem(playerCommand[1]).use();
+					present = true;
+				}
+				if (!present) {
+					print("You don't have " + playerCommand[1] + "!");
+				}
+				present = false;
+			} else
+				print("You bite your hand ferociously. Ouch.");
+			break;
+		/*
+		 * Dev commands, for testing use only
+		 */
+		case "dev":
+			if (playerCommand[1].equals("key")) { //DEV KEY: OPENS ALL DOORS
+				inventory.add(new DevKey());
+				print("You created a devkey.");
+			} else if (playerCommand[1].equals("lock")) { //DEV LOCK: LOCKS ALL DOORS
+				inventory.add(new DevLock());
+				print("You created a devlock.");
+			} else if (playerCommand[1].equals("remote")) { //DEV LOCK: LOCKS ALL DOORS
+				inventory.add(new Remote());
+				print("You created a remote.");
+			} else if(playerCommand[1].equals("currentRoom")) { //PRINT() CURRENT ROOM DESCRIPTION
+				print(currentRoom);
+			} else if(playerCommand[1].equals("currentRoomName")) { //PRINT() CURRENT ROOM DESCRIPTION
+				print(currentRoom.getName());
+			} else if(playerCommand[1].equals("respawn")) {
+				if (respawn) {
+					respawn=false;
+					print("Auto-respawn set to: OFF");
+				} else {
+					respawn=true;
+					print("Auto-respawn set to: ON");
+				}
+			} else if (playerCommand[1].equals("teleport")) {
+				teleport(playerCommand[2]);
+			} else { //PRINT DESC OF SELECT ROOM
+				print(roomsMap.get(playerCommand[1]));
+			}
+			break;
+		case "save":
+			saveGame();
+			break;
+		case "load":
+			try {
+				loadGame();
+			} catch (ClassNotFoundException e) {
+				print("Cannot load save file.");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				print("Cannot load save file.");
+			}
+			break;
+		case "talk":
+			if (playerCommand.length==2) {
+				if (currentRoom.hasNPC(playerCommand[1])) {
+					currentRoom.getNPC(playerCommand[1]).talk();
+				} else {
+					print("There is no " + playerCommand[1] + ", silly!");
+				}
+			} else {
+				print("You mumble to yourself.");
+			}
+			break;
+		case "give":
+			Item i;
+			if (hasItem(playerCommand[1])&&playerCommand[2].equals("to")&&currentRoom.hasNPC(playerCommand[3])) {
+				i = getItem(playerCommand[1]);
+				currentRoom.getNPC(playerCommand[3]).give(i);
+			} else {
+				print("This command is invalid.");
+			}
+			break;
+		case "x":
+			die();
+			break;
+		default:
+			print("This command is invalid.");
+			break;
+		}
+		gui.room(currentRoom.toString());
 	}
 	
 	/*
@@ -239,168 +409,21 @@ public class Game {
 		currentRoom = World.buildWorld();
 		
 		popDescs();
-		String[] playerCommand;
-		boolean present = false;
 
+		gui = new GameGUI();
 		
-		print(currentRoom);
+		gui.room(currentRoom.toString());
 		
-		do {
-			System.out.print("What do you want to do? ");
-			playerCommand = input.nextLine().split(" ");
-			switch(playerCommand[0]) {
-			case "e":
-			case "w":
-			case "n":
-			case "s":
-			case "u":
-			case "d":
-				move(playerCommand[0].charAt(0));
-				break;
-			case "take":
-				if (playerCommand.length==2) {
-					if (currentRoom.hasItem(playerCommand[1])){
-						Item item = currentRoom.getItem(playerCommand[1]);
-							item.take();
-					} else {
-						print("There is no " + playerCommand[1] + "!");
-					}
-				} else
-					print("You violently grasped at the air. You took nothing.");
-				break;
-			case "i":
-				print("You are currently holding:");
-				if(inventory.isEmpty()) {
-					print("You are holding nothing");
-				} else {
-					for (Item i : inventory) {
-						print(i);
-					}
-				}
-				break;
-			case "look":
-				if (playerCommand.length==2) {
-					if (hasItem(playerCommand[1])) {
-						getItem(playerCommand[1]).look();
-						present = true;
-					}
-					if (currentRoom.hasItem(playerCommand[1])) {
-						currentRoom.getItem(playerCommand[1]).look();
-						present = true;
-					}
-					if (currentRoom.hasNPC(playerCommand[1])) {
-						currentRoom.getNPC(playerCommand[1]).look();
-						present = true;
-					}
-					if (!present) {
-						print("You don't have " + playerCommand[1] + "!");
-					}
-				present = false;
-				} else
-					print("You simply just... observe...");
-				break;
-			case "use":
-				if (playerCommand.length==2) {
-					if (currentRoom.hasItem(playerCommand[1])) {
-						currentRoom.getItem(playerCommand[1]).use();
-						present = true;
-					}
-					if (hasItem(playerCommand[1])) {
-						getItem(playerCommand[1]).use();
-						present = true;
-					}
-					if (!present) {
-						print("You don't have " + playerCommand[1] + "!");
-					}
-					present = false;
-				} else
-					print("You bite your hand ferociously. Ouch.");
-				break;
-			/*
-			 * Dev commands, for testing use only
-			 */
-			case "dev":
-				if (playerCommand[1].equals("key")) { //DEV KEY: OPENS ALL DOORS
-					inventory.add(new DevKey());
-					print("You created a devkey.");
-				} else if (playerCommand[1].equals("lock")) { //DEV LOCK: LOCKS ALL DOORS
-					inventory.add(new DevLock());
-					print("You created a devlock.");
-				} else if (playerCommand[1].equals("remote")) { //DEV LOCK: LOCKS ALL DOORS
-					inventory.add(new Remote());
-					print("You created a remote.");
-				} else if(playerCommand[1].equals("currentRoom")) { //PRINT() CURRENT ROOM DESCRIPTION
-					print(currentRoom);
-				} else if(playerCommand[1].equals("currentRoomName")) { //PRINT() CURRENT ROOM DESCRIPTION
-					print(currentRoom.getName());
-				} else if(playerCommand[1].equals("respawn")) {
-					if (respawn) {
-						respawn=false;
-						print("Auto-respawn set to: OFF");
-					} else {
-						respawn=true;
-						print("Auto-respawn set to: ON");
-					}
-				} else if (playerCommand[1].equals("teleport")) {
-					teleport(playerCommand[2]);
-				} else { //PRINT DESC OF SELECT ROOM
-					print(roomsMap.get(playerCommand[1]));
-				}
-				break;
-			case "save":
-				saveGame();
-				break;
-			case "load":
-				try {
-					loadGame();
-				} catch (ClassNotFoundException e) {
-					print("Cannot load save file.");
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					print("Cannot load save file.");
-				}
-				break;
-			case "talk":
-				if (playerCommand.length==2) {
-					if (currentRoom.hasNPC(playerCommand[1])) {
-						currentRoom.getNPC(playerCommand[1]).talk();
-					} else {
-						print("There is no " + playerCommand[1] + ", silly!");
-					}
-				} else {
-					print("You mumble to yourself.");
-				}
-				break;
-			case "give":
-				Item i;
-				if (hasItem(playerCommand[1])&&playerCommand[2].equals("to")&&currentRoom.hasNPC(playerCommand[3])) {
-					i = getItem(playerCommand[1]);
-					currentRoom.getNPC(playerCommand[3]).give(i);
-				} else {
-					print("This command is invalid.");
-				}
-				break;
-			case "attack":
-				Item i1;
-				if (hasItem(playerCommand[3])&&playerCommand[2].equals("with")&&currentRoom.hasNPC(playerCommand[1])) {
-					i1 = getItem(playerCommand[3]);
-					currentRoom.getNPC(playerCommand[1]).attack(i1);
-				} else {
-					print("This command is invalid.");
-				}
-				break;
-			case "x":
-				die();
-				break;
-			default:
-				print("This command is invalid.");
-				break;
-			}
+		gui.prompt("What do you want to do?");
+		
+	}
 
-		} while(!dead);
-		
-		input.close();
-		
+	public static void setTalkingTo(String name) {
+		talkingTo=name;
+	}
+
+	public static String talkingToWho() {
+		return talkingTo;
 	}
 
 }
