@@ -11,6 +11,10 @@ public class DaVinci extends Character{
 	}
 	
 	public void talk() throws ClassNotFoundException, IOException {
+		
+		Game.setTalkingTo(getName());
+		Game.gui.setConvo(true);
+		
 		if (state==0) {
 			say("Yo, what's up! It's Da Vinci!");
 			String[] options = null;
@@ -49,9 +53,6 @@ public class DaVinci extends Character{
 			Game.print("Option" + (s+1) + ": " + options[s]);
 		}
 		Game.print("What say you?");
-		int choice = Game.input.nextInt();
-		Game.input.nextLine();
-		response(choice);
 	}
 	
 	public void response(int choice) throws ClassNotFoundException, IOException {
@@ -86,6 +87,9 @@ public class DaVinci extends Character{
 				break;
 			}
 		}
+		
+		Game.gui.setConvo(false);
+		Game.setTalkingTo("no one");
 	}
 	
 	

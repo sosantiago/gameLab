@@ -9,6 +9,8 @@ public class Remote extends Item{
 	}
 	
 	public void use() throws ClassNotFoundException, IOException {
+		Game.setTalkingTo("remote?");
+		Game.gui.setConvo(true);
 		Game.print("You stare at the remote for a few minutes. All of its buttons are perplexing to you. This is what you can make out:");
 		String[] options = {
 				"Maybe a start button? It's big and red, so it must be.",
@@ -24,17 +26,6 @@ public class Remote extends Item{
 			Game.print("Option" + (s+1) + ": " + options[s]);
 		}
 		Game.gui.prompt("What will you press?");
-		
-		/*
-		 * 
-		 * 
-		 * FIX REMOTE
-		 * 
-		 * 
-		 */
-		int choice = Game.input.nextInt();
-		Game.input.nextLine();
-		response(choice);
 	}
 	
 	public void response(int choice) throws ClassNotFoundException, IOException {
@@ -83,6 +74,9 @@ public class Remote extends Item{
 			Game.print("You pressed the city-lookin' button. A car beeping sound came from the remote. Who made this?!");
 			break;
 		}
+		
+		Game.gui.setConvo(false);
+		Game.setTalkingTo("no one");
 	}
 	
 	public void take() {

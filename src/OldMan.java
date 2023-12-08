@@ -9,6 +9,10 @@ public class OldMan extends Character {
 	}
 
 	public void talk() throws ClassNotFoundException, IOException {
+		
+		Game.gui.setConvo(true);
+		Game.setTalkingTo(getName());
+		
 		String[] options = {};
 		if (state==0) {
 			say("Hey, you don't look like your from around here. You must be another time traveller.");
@@ -35,6 +39,9 @@ public class OldMan extends Character {
 					break;
 			}
 			state++;
-		}	
+		}
+		
+		Game.gui.setConvo(false);
+		Game.setTalkingTo("no one");
 	}
 }

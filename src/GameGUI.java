@@ -33,7 +33,11 @@ public class GameGUI extends JFrame implements KeyListener {
 					if(!convo) {
 						Game.gameMethod();
 					} else {
-						Game.getCurrentRoom().getNPC(Game.talkingToWho()).response(Integer.parseInt(textField.getText()));
+						if(Game.talkingToWho().equals("remote?")){
+							((Remote) Game.getItem("remote")).response(Integer.parseInt(textField.getText()));
+						} else {
+							Game.getCurrentRoom().getNPC(Game.talkingToWho()).response(Integer.parseInt(textField.getText()));
+						}
 					}
 					textField.setText("");
 				}

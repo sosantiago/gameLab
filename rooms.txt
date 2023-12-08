@@ -23,7 +23,7 @@ CAVE3
 You are in a dark cave. The west is the way you came from. The caveman is no longer guarding his door.
 #
 CAVE_HOUSE
-You are inside of a small well-lit room. It is furnished with crude chairs and a large bed, and a wooden club lie on a weapons rack. On the bed lie a large, hairy creature you can only identify as a dog. You can exit west.
+You are inside of a small well-lit room. It is furnished with crude chairs and a large bed. On the bed lie a large, hairy creature you can only identify as a dog. You can exit west.
 #
 JUNGLE1
 You are in a large clearing, surrounded by tall trees. The trees tower above you, climbing them would be impossible on your own. There is a bone in the thick brush. 
