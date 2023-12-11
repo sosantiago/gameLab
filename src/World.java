@@ -36,7 +36,9 @@ public class World {
 	bathroom.addItem(new Toilet());
 	mudPuddle.addItem(new Guide());
 	pond.addItem(new Whistle());
-	caveManHouse.addItem(new Dog()); //Will likely become character, but it functions as I intend it to right now.
+	caveManHouse.addItem(new Dog());
+	caveManHouse.addItem(new CaveChair());
+	caveManHouse.addItem(new CaveBed());
 	jungle.addItem(new Bone());
 	gallery.addItem(new MonaLisa());
 	gallery.addItem(new TimeMachine());
