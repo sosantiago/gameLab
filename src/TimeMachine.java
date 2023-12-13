@@ -35,7 +35,6 @@ public class TimeMachine extends Item {
 	
 	public void setMode(char x) {
 		mode = x;
-		Game.print("(Mode set to "+ mode + ")");
 	}
 
 }

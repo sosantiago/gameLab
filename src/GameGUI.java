@@ -1,6 +1,5 @@
 import javax.swing.*;		// Import Swing GUI package
 import javax.swing.text.DefaultCaret;
-
 import java.awt.*;			// Import Adavnced Window Toolkit (AWT) package
 import java.awt.event.*;	// Import ART veent package (to program buttons)
 import java.io.IOException;

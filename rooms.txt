@@ -1,3 +1,6 @@
+LIVINGROOM1
+There is nothing of importance in your living room.
+#
 MUD_PUDDLE1a
 You are standing in a puddle of sticky mud. East of you is the entrance of a cave, to the west a vast jungle, and to the north a pond. You vaguely remember jumping drunk into a time machine, vowing to steal the Mona Lisa from Da Vinci himself, but you seem to have gone a little too far back. Maybe just steal what ever you can, whenever you are... there is also a note in the mud.
 #

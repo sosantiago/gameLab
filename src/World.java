@@ -42,6 +42,7 @@ public class World {
 	jungle.addItem(new Bone());
 	gallery.addItem(new MonaLisa());
 	gallery.addItem(new TimeMachine());
+	butterfly.addItem(new Chair());
 	
 	gallery.addNPC(new DaVinci());
 	butterfly.addNPC(new OldMan());

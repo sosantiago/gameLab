@@ -90,7 +90,6 @@ public class Remote extends Item{
 	
 	public void vinciDidIt() {
 		vinci++;
-		Game.print("Vinci variable is now: " + vinci);
 	}
 	
 	public int getVinci() {

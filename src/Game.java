@@ -113,7 +113,8 @@ public class Game {
 	
 	public static void teleport(String s) {
 		currentRoom = roomsMap.get(s);
-		Game.print(currentRoom);
+		gui.print(currentRoom.getMoveMessage());
+		gui.room(currentRoom.toString());
 	}
 	
 	/*
@@ -218,19 +219,16 @@ public class Game {
 	 */
 	public static void print(String message) {
 		gui.print(message);
-		//System.out.print(message+"\n");
 	}
 	
 	public static void print(Item message) {
 		String s = message.toString();
 		gui.print(s);
-		//System.out.println(message+"\n");
 	}
 	
 	public static void print(Room message) {
 		String s = message.toString();
 		gui.print(s);
-		//System.out.println(message+"\n");
 	}
 	
 	public static void die() throws ClassNotFoundException, IOException {
